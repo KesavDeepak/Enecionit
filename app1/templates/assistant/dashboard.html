@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enecionit</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'icon-2-removebg-preview.png' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.1.3/marked.min.js"></script>
+    <style>
+        
+        iframe {
+            border: none; 
+            width:100%;
+            height:600px;
+        }
+    </style>
+</head>
+<body>
+    <header class="top" id="home">
+        <img src="{% static 'icon-2-removebg-preview.png' %}" alt="Electropred Logo" class="logo" height="150">
+        <nav class="menu">
+            <ol style="font-size: medium; ">    
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'home' %}">Electro</a></li>
+                <li><a href="{% url 'predict' %}">Predict</a></li>
+            </ol>
+        </nav> 
+        <div class="circle" style = "margin-left: 43%;
+    margin-top: 45px;">
+        <div class="c1"><div class="c2"><div class="c3"></div></div></div>
+        
+    </div>
+    </header>
+    <h1>My Dashboard</h1>
+
+    <iframe src="https://lookerstudio.google.com/embed/reporting/2dec62ba-1bd0-44dd-a414-decbb58210bc/page/FKyFE" allowfullscreen></iframe>
+
+</body>
+</html>

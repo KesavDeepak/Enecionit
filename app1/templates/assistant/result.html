@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enecionit</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'icon-2-removebg-preview.png' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.1.3/marked.min.js"></script>
+</head>
+<body>
+    <header class="top" id="home">
+        <img src="{% static 'icon-2-removebg-preview.png' %}" alt="Electropred Logo" class="logo" height="150">
+        <nav class="menu">
+            <ol>    
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'home' %}">Electro</a></li>
+                <li><a href="{% url 'predict' %}">Predict</a></li>
+            </ol>
+        </nav> 
+        <div class="circle" style = "margin-left: 48%;
+    margin-top: 45px;">
+        <div class="c1"><div class="c2"><div class="c3"></div></div></div>
+        
+    </div>
+    </header>
+    {% csrf_token %}
+    <div>
+    <h1>Prediction Result</h1>
+    <h2><span style = "color:#00e7dd">Predicted Value: </span>{{ prediction }}</h2>
+    
+    </div>
+</body>
+</html>

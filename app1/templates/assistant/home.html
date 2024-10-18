@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Enecionit</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'icon-2-removebg-preview.png' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin-top: 50px; 
+            background-color: #001f3f;
+        }
+        #output { 
+            margin-top: 20px; 
+            font-size: 1.2em; 
+            color: white;
+        }
+        #query { 
+            width: 60%; 
+            padding: 10px; 
+            font-size: 1em;
+        }
+        .btn { 
+            padding: 10px 20px; 
+            margin: 5px; 
+            font-size: 1em; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 5px;
+            background-color: #003060; 
+            color: #00e7dd;
+        }
+        .btn:hover {
+            background-color: #00e7dd;
+            color:#003060;
+        }
+        button:disabled {
+            background-color: #00e7dd;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <header class="top" id="home">
+        <img src="{% static 'icon-2-removebg-preview.png' %}" alt="Electropred Logo" class="logo" height="150">
+        <nav class="menu">
+            <ol style="font-size: medium; ">    
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'home' %}">Electro</a></li>
+                <li><a href="{% url 'predict' %}">Predict</a></li>
+            </ol>
+        </nav> 
+        <div class="circle" style = "margin-left: 43%;
+    margin-top: 45px;">
+        <div class="c1"><div class="c2"><div class="c3"></div></div></div>
+        
+    </div>
+    </header>
+    <img src="{% static 'Screenshot_2024-10-16_054007-removebg-preview.png' %}" alt="" height="100px"><h1 style = "color:#00e7dd">Electro</h1>
+    
+    <!-- Input Section -->
+    <input type="text" id="query" placeholder="Ask something..." />
+    <button class="btn" id="send">Send</button>
+    
+    <!-- Control Buttons -->
+    <button class="btn" id="speak">Speak</button>
+    
+    
+    <p id="output">Output will appear here...</p>
+
+    <script>
+        $(document).ready(function(){
+            // Handle Send Button Click
+            $('#send').click(function(){
+                let userQuery = $('#query').val();
+                if(userQuery.trim() === ""){
+                    $('#output').text("Please enter a query.");
+                    return;
+                }
+                sendQuery(userQuery);
+            });
+
+            // Handle Speak Button Click - Initiate Speech Recognition
+            $('#speak').click(function(){
+                if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                    alert("Your browser does not support speech recognition. Please use Google Chrome.");
+                    return;
+                }
+
+                var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                var recognition = new SpeechRecognition();
+                recognition.lang = "en-US";
+                recognition.interimResults = false;
+                recognition.maxAlternatives = 1;
+
+                recognition.start();
+
+                recognition.onresult = function(event) {
+                    var transcript = event.results[0][0].transcript;
+                    $('#query').val(transcript);
+                    sendQuery(transcript);
+                };
+
+                recognition.onerror = function(event) {
+                    console.error("Speech recognition error detected: " + event.error);
+                    $('#output').text("Speech recognition error: " + event.error);
+                };
+            });
+
+            // Handle Type Button Click - Focus on Input Field
+            
+
+            // Function to Send Query to Backend
+            function sendQuery(userQuery){
+                $.ajax({
+                    url: "{% url 'process_query' %}",
+                    type: "POST",
+                    data: {
+                        'query': userQuery,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function(data){
+                        $('#output').text(data.response);
+                        // Text-to-Speech using Speech Synthesis API with male voice selection
+                        let utterance = new SpeechSynthesisUtterance(data.response);
+                        let voices = window.speechSynthesis.getVoices();
+                        // Select a male voice
+                        let maleVoice = voices.find(voice => voice.name.includes("Male") || voice.gender === "male");
+                        if (maleVoice) {
+                            u
+                            
+                            tterance.voice = maleVoice;
+                        }
+                        window.speechSynthesis.speak(utterance);
+                    },
+                    error: function(xhr, status, error){
+                        $('#output').text("An error occurred.");
+                        console.error(error);
+                    }
+                });
+            }
+
+            // Load voices asynchronously
+            window.speechSynthesis.onvoiceschanged = function() {
+                window.speechSynthesis.getVoices();
+            };
+        });
+    </script>
+</body>
+</html>

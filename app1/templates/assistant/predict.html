@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %} 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enecionit</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'icon-2-removebg-preview.png' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.1.3/marked.min.js"></script>
+    <style>
+        form {
+            /* Optional: change form background color */
+            padding: 20px; /* Add padding for better spacing */
+            border-radius: 5px; /* Optional: rounded corners */
+             
+            margin-left: 40%;/* Optional: shadow effect */
+        }
+        input {
+            margin-bottom: 10px; /* Space between input fields */
+            width: 17%; /* Full width for inputs */
+            padding: 8px; /* Add padding for better usability */
+            border: none; /* Remove default border */
+            border-radius: 4px; /* Optional: rounded corners for inputs */
+        }
+        button {
+            padding: 10px 15px; 
+            background-color: #003060; 
+            color: #00e7dd;
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #00e7dd; 
+            color:#003060
+        }
+    </style>
+</head>
+<body>
+    <header class="top" id="home">
+        <img src="{% static 'icon-2-removebg-preview.png' %}" alt="Electropred Logo" class="logo" height="150">
+        <nav class="menu">
+            <ol>    
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'home' %}">Electro</a></li>
+                <li><a href="{% url 'predict' %}">Predict</a></li>
+            </ol>
+        </nav> 
+        <div class="circle" style = "margin-left: 48%;
+    margin-top: 45px;">
+        <div class="c1"><div class="c2"><div class="c3"></div></div></div>
+        
+    </div>
+    </header>
+    <h2>Enter the Features for Prediction</h2>
+    <div class="pr">
+<form method="POST">
+    {% csrf_token %}
+    <label for="feature1" style = "color:#00e7dd;">Temperature : </label>
+    <input type="text" id="feature1" name="feature1">
+    <br>
+    <label for="feature2" style = "color:#00e7dd;">Humidity : </label>
+    <input type="text" id="feature2" name="feature2">
+    <br>
+    <label for="feature3" style = "color:#00e7dd;">Wind Speed : </label>
+    <input type="text" id="feature3" name="feature3">
+    <br>
+    <label for="feature4" style = "color:#00e7dd;">General Diffuse Flows : </label>
+    <input type="text" id="feature4" name="feature4">
+    <br>
+    <label for="feature5" style = "color:#00e7dd;">Diffuse Flows : </label>
+    <input type="text" id="feature5" name="feature5">
+    <br>
+    <label for="feature6" style = "color:#00e7dd;">Year : </label>
+    <input type="text" id="feature6" name="feature6" >
+    <br>
+    <label for="feature7" style = "color:#00e7dd;">Month : </label>
+    <input type="text" id="feature7" name="feature7" min="1" max = "12" required>
+    <br>
+    <label for="feature8" style = "color:#00e7dd;">Day : </label>
+    <input type="text" id="feature8" name="feature8" min="1" max = "31" required>
+    <br>
+    <label for="feature9" style = "color:#00e7dd;">Hour : </label>
+    <input type="text" id="feature9" name="feature9" min="0" max = "23" required>
+    <br>
+    <label for="feature10" style = "color:#00e7dd;">Minute : </label>
+    <input type="text" id="feature10" name="feature10" min="0" max = "60" required>
+    <br>
+    
+
+    <button type="submit">Predict</button>
+
+</form>
+</div>
+
+
+</body>
+</html>
