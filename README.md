@@ -9,6 +9,7 @@
 ### 4. I have also created a simple chatbot called Electro where it solves questions related to electrical energies.
 ### 5. I have also created a dashboard that explains the insights that I have found visually . So that the users can view and understand the insights more easily.
 ### 6. I used some references on web to find how to connect a exeternal python file to a webpage.
+### 7. The Dashboard Link:- https://lookerstudio.google.com/reporting/2dec62ba-1bd0-44dd-a414-decbb58210bc  
 
 ![Screenshot 2024-12-26 223324](https://github.com/user-attachments/assets/e2333d2f-04ac-4d23-9c56-fa8020a0e8c3)
 ![Screenshot 2024-12-26 223348](https://github.com/user-attachments/assets/4f1f63b8-e3b4-4898-b964-3bb7718aff45)
