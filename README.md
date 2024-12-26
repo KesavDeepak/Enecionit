@@ -1,5 +1,8 @@
 # Prediction of electricity consumed in households 
 ## A model which is used to predict the electricity consumed based on various factors like humidity, temperature, windspeed etc..
+
+### This project was made as a team (Error 404) 
+### Kesav Deepak Sridharan, Shivaram .M, Gokul Sharan, Hamza Farooque, Sudhir Kumar
 ### 1. I have developed a Machine Learning Model that predicts the electrical energy consumed in the households.
 ### 2. I have integrated the Machine Learning Model with the web development as to get an interface to my Machine Learning Model.
 ### 3. I have used HTML, CSS, JavaScript, Django, SQLite3 to create the webpages.
